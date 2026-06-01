@@ -18,7 +18,7 @@ p.novick = ggplot(maddamsetti, aes(novick, Size))+
   geom_boxplot()+
   xlab("")+
   theme_bw()
-ggsave(p.novick, file="figures/Novick-categories.pdf", width=6, height=4)
+ggsave(p.novick, file="figures/Fig-5-Novick-categories.pdf", width=6, height=4)
 
 
 pdf("figures/Fig-6-IncN.pdf", width=8, height=4)

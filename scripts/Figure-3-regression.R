@@ -93,7 +93,7 @@ p.maddamsetti.fit = p.maddamsetti +
 x.limits = c(1000, max(maddamsetti$Size))
 y.limits = c(min(min(ramiro.martinez$PCN), min(maddamsetti$PCN)),
              max(max(ramiro.martinez$PCN), max(maddamsetti$PCN)))
-pdf("figures/Figure-3-regression.pdf", width=8, height=4)
+pdf("figures/Fig3-regression.pdf", width=8, height=4)
 cowplot::plot_grid( p.maddamsetti.fit+
                       scale_x_log10(limits=x.limits, labels = scales::label_log())+
                       scale_y_log10(limits=y.limits, labels = scales::label_log()), 
