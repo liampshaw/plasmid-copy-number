@@ -21,3 +21,5 @@ p.clowes = ggplot(clowes, aes(Length, PCN))+
 pdf('figures/Figure-1-Clowes.pdf', width=4, height=4)
 p.clowes
 dev.off()
+
+summary(lm(log10(PCN)~log10(Length), data=clowes))
