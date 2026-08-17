@@ -10,7 +10,8 @@ amr.summary = data.frame(amrfinder.amr %>% group_by(Contig.id) %>%
                            summarise(n=length(Contig.id)))
 rownames(amr.summary) = amr.summary$Contig.id
 maddamsetti$amr = ifelse(maddamsetti$SeqID %in% rownames(amr.summary), "yes", "no")
-
+maddamsetti$amr.N = amr.summary[maddamsetti$SeqID, "n"]
+maddamsetti$amr.N[is.na(maddamsetti$amr.N)] = 0
 
 # So we can use consistent names
 maddamsetti$PCN = maddamsetti$InitialCopyNumberEstimate

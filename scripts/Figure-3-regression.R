@@ -13,7 +13,7 @@ library(lme4)
 library(lmerTest)  # gives p-values for fixed effects
 
 
-source('load-data.R')
+source('scripts/load-data.R')
 
 # Ramiro-Martinez
 # Summarise PTUs
@@ -71,7 +71,7 @@ maddamsetti.segmented.lm = segmented(
   maddamsetti.lm,
   seg.Z = ~log10_Size,
   psi = list(log10_Size = 4.25))
-AIC(mdadamsetti.segmented.lm, maddamsetti.lm)
+AIC(maddamsetti.segmented.lm, maddamsetti.lm)
 p.maddamsetti = ggplot(maddamsetti, aes(Size, PCN))+
   geom_point(size=0.2)+
   scale_x_log10()+

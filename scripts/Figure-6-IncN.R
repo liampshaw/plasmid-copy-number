@@ -1,4 +1,7 @@
-source('load-data.R')
+library(dplyr)
+library(ggplot2)
+
+source('scripts/load-data.R')
 
 
 
@@ -20,9 +23,20 @@ p.novick = ggplot(maddamsetti, aes(novick, Size))+
   theme_bw()
 ggsave(p.novick, file="figures/Fig-5-Novick-categories.pdf", width=6, height=4)
 
+# IncN plasmids, overall correlation
+p.IncN.overall = ggplot(IncN.plasmids, aes(Size, PCN, colour=amr))+
+  scale_y_log10()+
+  stat_smooth(method="lm", colour="grey")+
+  geom_point()+
+  scale_x_log10(breaks = c(4e4, 5e4, 7e4,1e5),
+                labels = scales::parse_format()(c("4 %*% 10^4", "5 %*% 10^4", "7 %*% 10^4", "1 %*% 10^5")))+
+  ylab("Copy number")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  scale_color_manual(values=c("red", "black"))
 
-pdf("figures/Fig-6-IncN.pdf", width=8, height=4)
-p.IncN = ggplot(IncN.plasmids, aes(Size, PCN, group=amr))+
+pdf("figures/Fig-6-IncN.pdf", width=10, height=4)
+p.IncN.split = ggplot(IncN.plasmids, aes(Size, PCN, group=amr, colour=amr))+
   scale_y_log10()+
   stat_smooth(method="lm", colour="grey")+
   geom_point()+
@@ -30,8 +44,11 @@ p.IncN = ggplot(IncN.plasmids, aes(Size, PCN, group=amr))+
   scale_x_log10(breaks = c(4e4, 5e4, 7e4,1e5),
                 labels = scales::parse_format()(c("4 %*% 10^4", "5 %*% 10^4", "7 %*% 10^4", "1 %*% 10^5")))+
   ylab("Copy number")+
-  theme_bw()
-p.IncN
+  theme_bw()+
+  theme(legend.position = "none")+
+  scale_color_manual(values=c("red", "black"))
+cowplot::plot_grid(p.IncN.overall+ggtitle("(a)"), p.IncN.split+ggtitle("(b)"), axis="tb", align="h", 
+                   rel_widths = c(1.5,2))
 dev.off()
 
 
